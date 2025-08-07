@@ -11,28 +11,35 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Title:</label>
                     <input type="text" name="listing[title]" placeholder="Title" class="form-control" required>
+                    <div class="valid-feedback">Title Looks Promising!</div>
+                    <div class="invalid-feedback">Title should be present</div>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>
                     <textarea name="listing[description]" class="form-control" required></textarea>
+                    <div class="invalid-feedback">Please enter a short description</div>
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Image URL:</label>
                     <input type="text" name="listing[image]" placeholder="Image URL" class="form-control">
+                    <div class="invalid-feedback">Please enter a valid Image URL</div>
                 </div>
                 <div class="row">
                     <div class="mb-3 col-md-5">
                         <label for="price" class="form-label">Price:</label>
                         <input type="number" name="listing[price]" placeholder="Price" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a Price!</div>
                     </div>
                     <div class="mb-3 col-md-7">
                         <label for="Location" class="form-label">Location:</label>
                         <input type="text" name="listing[location]" placeholder="Location" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a Location!</div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="Country" class="form-label">Country:</label>
                     <input type="text" name="listing[country]" placeholder="Country" class="form-control" required>
+                    <div class="invalid-feedback">Please enter a Country</div>
                 </div>
                 <div class="new-attribute mt-4">
                     <button type="submit" class="btn btn-dark add-btn">Add Details</button>
