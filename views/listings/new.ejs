@@ -1,0 +1,46 @@
+<% layout("layouts/boilerplate") %>
+
+<body>
+    <div class="row">
+        <div class="col-5">
+            <br><br>
+            <div class="new-attribute mb-4">
+                <h2>Tell Us About Your Property</h2>
+            </div>
+            <form method="POST" action="/listings">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" name="listing[title]" placeholder="Title" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea name="listing[description]" class="form-control" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL:</label>
+                    <input type="text" name="listing[image]" placeholder="Image URL" class="form-control">
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-5">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="number" name="listing[price]" placeholder="Price" class="form-control"
+                                required>
+                    </div>
+                    <div class="mb-3 col-md-7">
+                        <label for="Location" class="form-label">Location:</label>
+                        <input type="text" name="listing[location]" placeholder="Location" class="form-control"
+                                required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="Country" class="form-label">Country:</label>
+                    <input type="text" name="listing[country]" placeholder="Country" class="form-control" required>
+                </div>
+                <div class="new-attribute mt-4">
+                    <button type="submit" class="btn btn-dark add-btn">Add Details</button>
+                </div>
+                <br><br>
+            </form>
+        </div>
+    </div>
+</body>
