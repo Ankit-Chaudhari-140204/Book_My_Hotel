@@ -6,6 +6,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 require("dotenv").config();
+const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 const MONGO_URL = process.env.MONGO_URL;
 
@@ -51,11 +53,12 @@ app.get("/listings/:id", async (req, res) => {
 });
 
 //create route
-app.post("/listings", async (req, res) => {
+app.post("/listings", wrapAsync(async (req, res , next) => {
     const newListing = new Listing(req.body.listing);
     await newListing.save();
     res.redirect("/listings");
-});
+    })
+);
 
 //edit route
 app.get("/listings/:id/edit", async (req, res) => {
@@ -76,6 +79,15 @@ app.delete("/listings/:id", async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
+});
+
+app.all("*", (req,res,next) => {
+    next(new ExpressError(404,"Page Not Found"))
+})
+
+app.use((err, req, res, next) => {
+    let {statusCode,mrssage}=err;
+    res.status(statusCode).send(message);
 });
 
 app.listen(8080);
