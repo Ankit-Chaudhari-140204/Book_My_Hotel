@@ -1,0 +1,8 @@
+<%layout("/layouts/boilerplate.ejs")%>
+
+<div class="row">
+    <div class="alert alert-danger col-8 offset-1 mt-3" role="alert">
+        <h4 class="alert-heading"><%= error.message %></h4>
+        <p><%= error.stack %></p>
+      </div>
+</div>
