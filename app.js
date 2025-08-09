@@ -9,6 +9,7 @@ require("dotenv").config();
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema } = require("./Schema.js");
+const Review = require("./models/review.js");
 
 const MONGO_URL = process.env.MONGO_URL;
 
@@ -33,7 +34,7 @@ app.use(express.static(path.join(__dirname, "/public")))
 
 // joi function for schema validation 
 const validateListing = (req, res, next) => {
-    let { error } = listingSchema.validate(req, body);
+    let { error } = listingSchema.validate(req.body);
     if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
         throw new ExpressError(errMsg, 400);
@@ -94,6 +95,19 @@ app.delete("/listings/:id", wrapAsync(async (req, res, next) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
+})
+);
+
+// reviews post route
+app.post("/listings/:id/reviews", wrapAsync(async(req, res)=>{
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+    await newReview.save();
+    await listing.save();
+
+    res.send("New Review Saved");
 })
 );
 
