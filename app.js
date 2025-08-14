@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, "/public")));
 const sessionOptions = {
     secret: "mysupersecretcode",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         expires: Date.now() + 24 * 60 * 60 * 1000,
         maxAge: 24 * 60 * 60 * 1000,
@@ -53,6 +53,7 @@ app.get("/", (req, res) => {
 });
 
 app.use(session(sessionOptions));
+
 app.use(flash());
 
 
@@ -69,6 +70,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currentUser = req.user;
     next();
 });
 
